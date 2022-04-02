@@ -217,7 +217,7 @@ public class RestApiTests {
     @Test
     @Feature("Store")
     @Story("Store")
-    @DisplayName("Inventory")
+    @DisplayName("Check Inventory")
     @Severity(SeverityLevel.NORMAL)
     void inventoryTest() {
         given(Specs.request)

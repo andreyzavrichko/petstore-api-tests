@@ -1,127 +1,264 @@
 package ru.zavrichko.api;
 
-import io.restassured.RestAssured;
-import org.junit.jupiter.api.BeforeAll;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.zavrichko.api.data.GenerateData;
+import ru.zavrichko.api.models.NewOrder;
+import ru.zavrichko.api.models.NewPet;
+import ru.zavrichko.api.models.NewUser;
+import ru.zavrichko.api.spec.Specs;
 
-import ru.zavrichko.api.model.User;
-import static io.restassured.RestAssured.given;
-import static io.restassured.http.ContentType.JSON;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static ru.zavrichko.api.spec.Specs.request;
-import static ru.zavrichko.api.spec.Specs.responseSpec;
 
 public class RestApiTests {
-    @BeforeAll
-    static void setup() {
-        RestAssured.baseURI = "https://petstore.swagger.io";
-    }
 
     @Test
+    @Feature("Pet")
+    @Story("Pet")
+    @DisplayName("Find by status Available")
+    @Severity(SeverityLevel.NORMAL)
     void findByStatusAvailableTest() {
-        given()
-                .spec(request)
+        given(Specs.request)
                 .when()
                 .params("status", "available")
                 .get("/v2/pet/findByStatus")
                 .then()
-                .spec(responseSpec)
-                .statusCode(200)
+                .spec(Specs.responseSpec)
                 .body("id", hasSize(greaterThan(0)));
     }
 
     @Test
+    @Feature("Pet")
+    @Story("Pet")
+    @DisplayName("Find by status Pending")
+    @Severity(SeverityLevel.NORMAL)
     void findByStatusPendingTest() {
-        given()
+        given(Specs.request)
                 .when()
                 .params("status", "pending")
                 .get("/v2/pet/findByStatus")
                 .then()
-                .statusCode(200)
+                .spec(Specs.responseSpec)
                 .body("id", hasSize(greaterThan(0)));
     }
 
     @Test
+    @Feature("Pet")
+    @Story("Pet")
+    @DisplayName("Find by status Sold")
+    @Severity(SeverityLevel.NORMAL)
     void findByStatusSoldTest() {
-        given()
+        given(Specs.request)
                 .when()
                 .params("status", "sold")
                 .get("/v2/pet/findByStatus")
                 .then()
-                .statusCode(200)
+                .spec(Specs.responseSpec)
                 .body("id", hasSize(greaterThan(0)));
     }
 
     @Test
+    @Feature("Pet")
+    @Story("Pet")
+    @DisplayName("Find by status Null")
+    @Severity(SeverityLevel.NORMAL)
     void findByStatusNullTest() {
-        given()
+        given(Specs.request)
                 .when()
+                .params("status", "null")
                 .get("/v2/pet/findByStatus")
                 .then()
-                .statusCode(200)
-                .body("id", hasSize(0));
+                .spec(Specs.responseSpec);
     }
 
 
-
     @Test
+    @Feature("Pet")
+    @Story("Pet")
+    @DisplayName("Find by pet ID")
+    @Severity(SeverityLevel.NORMAL)
     void petIdTest() {
-        given()
+        given(Specs.request)
                 .when()
                 .get("/v2/pet/9223372016854934000")
                 .then()
-                .statusCode(200)
+                .spec(Specs.responseSpec)
                 .body("id", is(9223372016854934000L))
                 .body("name", is("doggie"));
     }
 
     @Test
-    void inventoryTest() {
-        given()
+    @Feature("User")
+    @Story("User")
+    @DisplayName("Create User")
+    @Severity(SeverityLevel.BLOCKER)
+    void createUserTest() {
+        NewUser newUser = GenerateData.getUser(8, 16, true, true, true);
+
+        String response = given(Specs.request)
+                .body(newUser)
                 .when()
-                .get("/v2/store/inventory")
+                .post("/v2/user")
                 .then()
-                .statusCode(200)
-                .body("sold", is(5));
+                .spec(Specs.responseSpec)
+                .extract().path("message");
+
+        assertThat(response).isEqualTo(newUser.getId().toString());
+    }
+
+
+    @Test
+    @Feature("User")
+    @Story("User")
+    @DisplayName("Create User with array")
+    @Severity(SeverityLevel.BLOCKER)
+    void createWithArrayTest() {
+        NewUser newUser = GenerateData.getUser(8, 16, true, true, true);
+
+        String response = given(Specs.request)
+                .body(newUser)
+                .when()
+                .post("/v2/user/createWithArray")
+                .then()
+                .statusCode(500)
+                .extract().path("message");
+
+        assertThat(response).isEqualTo("something bad happened");
+    }
+
+
+    @Test
+    @Feature("User")
+    @Story("User")
+    @DisplayName("Create User with list")
+    @Severity(SeverityLevel.BLOCKER)
+    void createWithListTest() {
+        NewUser newUser = GenerateData.getUser(8, 16, true, true, true);
+
+        String response = given(Specs.request)
+                .body(newUser)
+                .when()
+                .post("/v2/user/createWithList")
+                .then()
+                .statusCode(500)
+                .extract().path("type");
+
+        assertThat(response).isEqualTo("unknown");
     }
 
     @Test
-    void getUserNoValidTest() {
-        given()
+    @Feature("User")
+    @Story("User")
+    @DisplayName("Get User")
+    @Severity(SeverityLevel.CRITICAL)
+    void getUserTest() {
+        given(Specs.request)
                 .when()
-                .get("/v2/user/1")
+                .get("v2/user/user564564654")
+                .then()
+                .spec(Specs.responseSpec)
+                .body("id", is(4984564564654L));
+    }
+
+    @Test
+    @Feature("User")
+    @Story("User")
+    @DisplayName("Get empty User")
+    @Severity(SeverityLevel.TRIVIAL)
+    void getEmptyUserTest() {
+        given(Specs.request)
+                .when()
+                .get("v2/user/user55")
                 .then()
                 .statusCode(404)
                 .body("message", is("User not found"));
     }
 
     @Test
-    void logoutTest() {
-        given()
+    @Feature("User")
+    @Story("User")
+    @DisplayName("Get null User")
+    @Severity(SeverityLevel.TRIVIAL)
+    void getNullUserTest() {
+        given(Specs.request)
                 .when()
-                .get("/v2/user/logout")
+                .get("v2/user/")
                 .then()
-                .statusCode(200)
-                .body("message", is("ok"));
+                .statusCode(405);
     }
 
     @Test
-    void singleUserWithLombokModel() {
+    @Feature("Order")
+    @Story("Order")
+    @DisplayName("Create Order")
+    @Severity(SeverityLevel.NORMAL)
+    void createOrderTest() {
+        NewOrder newOrder = GenerateData.getOrder(8, 16, true, true, true);
 
-        User data = given()
-                .contentType(JSON)
-
+        Integer response = given(Specs.request)
+                .body(newOrder)
                 .when()
-                .post("/user")
+                .post("/v2/store/order")
                 .then()
-                .statusCode(201)
-                .extract().as(User.class);
+                .spec(Specs.responseSpec)
+                .extract().path("id");
 
-        assertEquals(2, data.getId());
+        assertThat(response).isEqualTo(newOrder.getId());
     }
 
+    @Test
+    @Feature("Store")
+    @Story("Store")
+    @DisplayName("Inventory")
+    @Severity(SeverityLevel.NORMAL)
+    void inventoryTest() {
+        given(Specs.request)
+                .when()
+                .get("/v2/store/inventory")
+                .then()
+                .spec(Specs.responseSpec)
+                .body("status", is(122));
+    }
+
+    @Test
+    @Feature("Order")
+    @Story("Order")
+    @DisplayName("Find order")
+    @Severity(SeverityLevel.CRITICAL)
+    void findOrderTest() {
+        given(Specs.request)
+                .when()
+                .get("/v2/store/order/2")
+                .then()
+                .statusCode(404)
+                .body("message", is("Order not found"));
+    }
+
+    @Test
+    @Feature("Pet")
+    @Story("Pet")
+    @DisplayName("Create pet")
+    @Severity(SeverityLevel.BLOCKER)
+    void createPetTest() {
+        NewPet newPet = GenerateData.getPet(8, 16, true, true, true);
+
+        Integer response = given(Specs.request)
+                .body(newPet)
+                .when()
+                .post("/v2/pet")
+                .then()
+                .spec(Specs.responseSpec)
+                .extract().path("id");
+
+        assertThat(response).isEqualTo(newPet.getId());
+    }
 
 }

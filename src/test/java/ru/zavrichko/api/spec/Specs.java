@@ -6,16 +6,17 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 import static io.restassured.RestAssured.with;
+import static ru.zavrichko.api.helpers.CustomAllureListener.withCustomTemplates;
+
 
 public class Specs {
     public static RequestSpecification request = with()
+            .filter(withCustomTemplates())
             .baseUri("https://petstore.swagger.io")
-            //.basePath("/v2")
             .log().all()
             .contentType(ContentType.JSON);
 
     public static ResponseSpecification responseSpec = new ResponseSpecBuilder()
             .expectStatusCode(200)
-//            .expectBody(containsString("success"))
             .build();
 }

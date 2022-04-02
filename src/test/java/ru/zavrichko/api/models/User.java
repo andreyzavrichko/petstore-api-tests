@@ -1,7 +1,6 @@
-package ru.zavrichko.api.model;
+package ru.zavrichko.api.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -11,12 +10,22 @@ public class User {
     private Integer userStatus;
     private String email;
     private String phone;
-    @JsonProperty("first_name")
     private String firstName;
-    @JsonProperty("username")
     private String username;
-    @JsonProperty("last_name")
     private String lastName;
-    @JsonProperty("password")
     private String password;
 }
+
+
+/*
+{
+  "id": 97897987,
+  "username": "gnffg",
+  "firstName": "fdgfdg",
+  "lastName": "fdgfdg",
+  "email": "test@test.test",
+  "password": "123456",
+  "phone": "44887878454",
+  "userStatus": 1
+}
+ */

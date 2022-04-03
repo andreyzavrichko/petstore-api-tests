@@ -5,7 +5,7 @@
 Дипломный проект реализации автотестирования **Rest Api**.<br/>
 >В качестве объекта тестирования выбран сайт https://petstore.swagger.io/ с открытым api.<br/>
 
-![This is an image](/design/images/open-library.png)
+![This is an image](/design/images/petstore.png)
 
 Сайт позволяет получать информацию о питомцах, заказах и пользователях, а также создавать их.
 

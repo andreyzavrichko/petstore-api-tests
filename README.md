@@ -69,10 +69,6 @@ gradle clean test
 
 ### Итоговые dashboard в Allure Report
 ![This is an image](/design/images/allure_report_dashboard.png)
-### Итоговые dashboard в Allure Report
-![This is an image](/design/images/allure_report_dashboard.png)
-### Список ошибок, разбитых по категориям в Allure Report
-![This is an image](/design/images/allure_report_dashboard.png)
 ### Список тест-кейсов в Allure Report
 ![This is an image](/design/images/testcases.png)
 ### Графики Dashboards в Allure Report

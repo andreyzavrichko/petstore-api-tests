@@ -1,8 +1,10 @@
 # petstore-api-tests
 ## :cherry_blossom:	Содержание
+> ➠ [Используемые технологии](#Используемые-технологии)
+>
 > ➠ [Описание проекта](#Описание-проекта)
 >
-> ➠ [Список проверок, реализованных в автотестах](#Список-проверок,-реализованных-в-автотестах)
+> ➠ [Список проверок](#Список-проверок,-реализованных-в-автотестах)
 >
 > ➠ [Пример ручного выполнения тестов с помощью Postman](#Пример-ручного-выполнения-тестов-с-помощью-Postman)
 >
@@ -14,6 +16,7 @@
 >
 > ➠ [Оповещения](#Настроено-автоматическое-оповещение-о-результатах-сборки-Jenkins-в-Telegram-бот)
 
+## Используемые технологии
 ![This is an image](/design/icons/Java.png)![This is an image](/design/icons/Gradle.png)![This is an image](/design/icons/Rest-Assured.png)![This is an image](/design/icons/Intelij_IDEA.png)![This is an image](/design/icons/JUnit5.png)![This is an image](/design/icons/Jenkins.png)![This is an image](/design/icons/Allure_Report.png)![This is an image](/design/icons/AllureTestOps.png)![This is an image](/design/icons/Telegram.png)
 ## Описание проекта
 Дипломный проект реализации автотестирования **Rest Api**.<br/>

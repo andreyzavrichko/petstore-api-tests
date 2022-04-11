@@ -23,7 +23,7 @@ public class GenerateData {
     }
 
     public static NewOrder getOrder(int minimumLength, int maximumLength, boolean includeUppercase,
-                                  boolean includeSpecial, boolean includeDigit) {
+                                    boolean includeSpecial, boolean includeDigit) {
         Faker faker = new Faker();
         return NewOrder.builder()
                 .id(faker.hashCode())
@@ -36,7 +36,7 @@ public class GenerateData {
     }
 
     public static NewPet getPet(int minimumLength, int maximumLength, boolean includeUppercase,
-                                  boolean includeSpecial, boolean includeDigit) {
+                                boolean includeSpecial, boolean includeDigit) {
         Faker faker = new Faker();
         return NewPet.builder()
                 .id(faker.hashCode())

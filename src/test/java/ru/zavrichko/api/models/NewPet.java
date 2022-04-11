@@ -13,7 +13,6 @@ public class NewPet {
     private String status;
 
 
-
     @Override
     public String toString() {
         return "{ \"id\": \"" + id + "\", \"name\": \"" + name + "\", \"status\": \"" + status + "\" }";

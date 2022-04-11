@@ -15,17 +15,3 @@ public class User {
     private String lastName;
     private String password;
 }
-
-
-/*
-{
-  "id": 97897987,
-  "username": "gnffg",
-  "firstName": "fdgfdg",
-  "lastName": "fdgfdg",
-  "email": "test@test.test",
-  "password": "123456",
-  "phone": "44887878454",
-  "userStatus": 1
-}
- */

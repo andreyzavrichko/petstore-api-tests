@@ -1,15 +1,15 @@
 package ru.zavrichko.api.data;
 
 import com.github.javafaker.Faker;
-import ru.zavrichko.api.models.NewPet;
-import ru.zavrichko.api.models.NewUser;
-import ru.zavrichko.api.models.NewOrder;
+import ru.zavrichko.api.models.Pet;
+import ru.zavrichko.api.models.User;
+import ru.zavrichko.api.models.Order;
 
-public class GenerateData {
-    public static NewUser getUser(int minimumLength, int maximumLength, boolean includeUppercase,
+public class DataGenerator {
+    public static User getUser(int minimumLength, int maximumLength, boolean includeUppercase,
                                   boolean includeSpecial, boolean includeDigit) {
         Faker faker = new Faker();
-        return NewUser.builder()
+        return User.builder()
                 .id(faker.hashCode())
                 .userName(faker.name().username())
                 .firstName(faker.name().username())
@@ -22,10 +22,10 @@ public class GenerateData {
                 .build();
     }
 
-    public static NewOrder getOrder(int minimumLength, int maximumLength, boolean includeUppercase,
+    public static Order getOrder(int minimumLength, int maximumLength, boolean includeUppercase,
                                     boolean includeSpecial, boolean includeDigit) {
         Faker faker = new Faker();
-        return NewOrder.builder()
+        return Order.builder()
                 .id(faker.hashCode())
                 .petId(faker.hashCode())
                 .quantity(faker.hashCode())
@@ -35,14 +35,13 @@ public class GenerateData {
                 .build();
     }
 
-    public static NewPet getPet(int minimumLength, int maximumLength, boolean includeUppercase,
+    public static Pet getPet(int minimumLength, int maximumLength, boolean includeUppercase,
                                 boolean includeSpecial, boolean includeDigit) {
         Faker faker = new Faker();
-        return NewPet.builder()
+        return Pet.builder()
                 .id(faker.hashCode())
                 .name(faker.name().name())
                 .status("placed")
                 .build();
     }
-
 }

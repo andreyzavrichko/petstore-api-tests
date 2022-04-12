@@ -6,10 +6,10 @@ import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import ru.zavrichko.api.data.GenerateData;
-import ru.zavrichko.api.models.NewOrder;
-import ru.zavrichko.api.models.NewPet;
-import ru.zavrichko.api.models.NewUser;
+import ru.zavrichko.api.data.DataGenerator;
+import ru.zavrichko.api.models.Order;
+import ru.zavrichko.api.models.Pet;
+import ru.zavrichko.api.models.User;
 import ru.zavrichko.api.spec.Specs;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -79,7 +79,6 @@ public class RestApiTests {
                 .spec(Specs.responseSpec);
     }
 
-
     @Test
     @Feature("Pet")
     @Story("Pet")
@@ -101,7 +100,7 @@ public class RestApiTests {
     @DisplayName("Create User")
     @Severity(SeverityLevel.BLOCKER)
     void createUserTest() {
-        NewUser newUser = GenerateData.getUser(8, 16, true, true, true);
+        User newUser = DataGenerator.getUser(8, 16, true, true, true);
 
         String response = given(Specs.request)
                 .body(newUser)
@@ -114,14 +113,13 @@ public class RestApiTests {
         assertThat(response).isEqualTo(newUser.getId().toString());
     }
 
-
     @Test
     @Feature("User")
     @Story("User")
     @DisplayName("Create User with array")
     @Severity(SeverityLevel.BLOCKER)
     void createWithArrayTest() {
-        NewUser newUser = GenerateData.getUser(8, 16, true, true, true);
+        User newUser = DataGenerator.getUser(8, 16, true, true, true);
 
         String response = given(Specs.request)
                 .body(newUser)
@@ -134,14 +132,13 @@ public class RestApiTests {
         assertThat(response).isEqualTo("something bad happened");
     }
 
-
     @Test
     @Feature("User")
     @Story("User")
     @DisplayName("Create User with list")
     @Severity(SeverityLevel.BLOCKER)
     void createWithListTest() {
-        NewUser newUser = GenerateData.getUser(8, 16, true, true, true);
+        User newUser = DataGenerator.getUser(8, 16, true, true, true);
 
         String response = given(Specs.request)
                 .body(newUser)
@@ -201,7 +198,7 @@ public class RestApiTests {
     @DisplayName("Create Order")
     @Severity(SeverityLevel.NORMAL)
     void createOrderTest() {
-        NewOrder newOrder = GenerateData.getOrder(8, 16, true, true, true);
+        Order newOrder = DataGenerator.getOrder(8, 16, true, true, true);
 
         Integer response = given(Specs.request)
                 .body(newOrder)
@@ -248,7 +245,7 @@ public class RestApiTests {
     @DisplayName("Create pet")
     @Severity(SeverityLevel.BLOCKER)
     void createPetTest() {
-        NewPet newPet = GenerateData.getPet(8, 16, true, true, true);
+        Pet newPet = DataGenerator.getPet(8, 16, true, true, true);
 
         Integer response = given(Specs.request)
                 .body(newPet)

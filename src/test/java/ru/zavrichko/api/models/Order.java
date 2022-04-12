@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewOrder {
+public class Order {
     private Integer id;
     private Integer petId;
     private Integer quantity;
@@ -19,6 +19,7 @@ public class NewOrder {
 
     @Override
     public String toString() {
-        return "{ \"id\": \"" + id + "\", \"petId\": \"" + petId + "\", \"quantity\": \"" + quantity + "\", \"shipDate\": \"" + shipDate + "\", \"status\": \"" + status + "\", \"complete\": \"" + complete + "\" }";
+        return "{ \"id\": \"" + id + "\", \"petId\": \"" + petId + "\", \"quantity\": \"" + quantity + "\"," +
+                " \"shipDate\": \"" + shipDate + "\", \"status\": \"" + status + "\", \"complete\": \"" + complete + "\" }";
     }
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NewPet {
+public class Pet {
     private Integer id;
     private String name;
     private String status;
